@@ -5,6 +5,7 @@ import axios from 'axios';
 // Initial state
 const initialState = {
   courses: [],
+  courseId: {},
   loading: true,
 };
 
@@ -32,12 +33,21 @@ export const CourseProvider = ({ children }) => {
     }
   }
 
+  const getCourse = (courseId) => {
+    let course = [...state.courses];
+
+    const singleCourse = course.find((crs) => crs.courseId === courseId);
+    return singleCourse;
+  };
+
   return (
     <CourseContext.Provider
       value={{
         courses: state.courses,
         loading: state.loading,
+        courseId: state.courseId,
         getCourses,
+        getCourse,
       }}
     >
       {children}

@@ -1,10 +1,9 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { CourseContext } from '../../context/course/CourseState';
+import CourseList from './CourseList';
 
 export const Courses = () => {
   const { courses, getCourses } = useContext(CourseContext);
-
-  console.log(courses);
 
   useEffect(() => {
     getCourses();
@@ -13,13 +12,11 @@ export const Courses = () => {
 
   return (
     <Fragment>
-      <h2 className='text-center mt-5 mb-3'>Course List</h2>
-      <div className='container mt-5 mb-5' style={grid}>
-        <ul>
-          {courses.map((item, index) => (
-            <li key={index}>{item.author}</li>
-          ))}
-        </ul>
+      <h2 className='text-center mt-5 mb-5 '>All Courses</h2>
+      <div className='container mt-4 mb-4' style={grid}>
+        {courses.map((course) => (
+          <CourseList course={course} key={course.courseId} />
+        ))}
       </div>
     </Fragment>
   );
@@ -27,6 +24,6 @@ export const Courses = () => {
 
 const grid = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-  gridGap: '1.5rem',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+  gridGap: '2rem',
 };
